@@ -5,7 +5,7 @@ import { SignupBox } from '../Layout/SignupBox'
 const LoginSignup = () => {
 	return (
 		<>
-			<LoginBox />
+			{/* <LoginBox /> */}
 			{/* <SignupBox /> */}
 		</>
 	)

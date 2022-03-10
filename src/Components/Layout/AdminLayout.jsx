@@ -1,31 +1,13 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-import { logout } from '../Helpers/Login'
-
-const AdminLayout = () => {
-
-    const handleLogout = (e) => {
-		e.preventDefault();
-		logout()
-			.then(res => {
-				console.log(res)
-			})
-	}
-
-    return (
-        <>
-            <div>
-                <nav>
-                    <Link to="/">Public Page</Link>
-                    <Link to="/admin">Admin Page</Link>
-                    <Link to="/login">Login</Link>
-                    <a href="#" onClick={handleLogout}>Logout</a>
-                </nav>
-            </div>
-            <Outlet />
-        </>
-    );
-};
+const AdminLayout = ( props ) => {
+	let navigate = useNavigate()
+	return (
+		<>
+			{ props.loggedIn ? <Outlet /> : navigate( "/", { replace: true } ) }
+		</>
+	)
+}
 
 export default AdminLayout;

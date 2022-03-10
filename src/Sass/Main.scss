@@ -33,12 +33,12 @@ $col9: #ee3835;
 
 .colWrap {
 	position: absolute;
-	top: 5vh;
+	bottom: 0;
 	left: 0;
 	padding: 10px;
 	background-color: #fff;
-	display: flex;
-	display: none;
+	// display: flex;
+	// display: none;
 	.bgCol {
 		background-color: $bgCol;
 		width: 20px;
@@ -90,12 +90,17 @@ html {
 	background-color: $bgCol;
 }
 
+.displayNone{
+	display: none;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
 	text-decoration: none;
+	color: $col7;
 }
 
 nav{
@@ -104,10 +109,17 @@ nav{
 	display: block;
 	background-color: $col2;
 	display: flex;
-	a{
+	.navLink{
+		display: block;
+		border: none;
+		color: $col8;
+		text-decoration: none;
+		background: none;
+
 		align-self: center;
 		margin: 0 0 0 auto;
 		padding-right: 10px;
+		font-size: 12px;
 	}
 }
 
@@ -148,17 +160,18 @@ section {
 				padding: 0.5em 0.7em;
 				border: none;
 				border-bottom: 1px solid rgb(197, 197, 197);
+				color: $col3;
 				&:focus-visible {
 					outline: 2px solid $col8;
 				}
 				&:focus {
 					&::placeholder {
-						color: rgb(230, 230, 230);
+						color: $col7;
 					}
 				}
 			}
 		}
-		input[type="submit"] {
+		.logBtn {
 			border: none;
 			background-color: $col8;
 			display: block;
@@ -168,6 +181,8 @@ section {
 			border-radius: 5px;
 			width: 100%;
 			color: $col7;
+			text-align: center;
+			cursor: pointer;
 		}
 		.bottomText {
 			font-size: 12px;

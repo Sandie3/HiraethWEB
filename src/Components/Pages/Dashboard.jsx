@@ -1,8 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+
+import { getUsers } from '../Helpers/User'
 
 const Dashboard = () => {
+
+	const [ users, setUsers ] = useState()
+	const [ err, setErr ] = useState( false )
+
+	useEffect( () => {
+
+		getUsers().then( res => {
+			if ( res ) {
+				setErr( false )
+				setUsers( res )
+			} else {
+				setErr( true )
+				setUsers()
+			}
+		} )
+
+	}, [] )
+
+
 	return (
-		<div>Dashboard</div>
+		<>
+			{
+				users &&
+				users.map( ( u, i ) => {
+					return (
+						<Fragment key={i}>
+							<Link to={ "user/" + u.username }>{ u.username }</Link><br />
+						</Fragment>
+					)
+				} )
+			}
+			{
+				!users && !err && <p>Loading...</p>
+			}
+			{
+				err && <h1>ERROR!</h1>
+			}
+		</>
 	)
 }
 

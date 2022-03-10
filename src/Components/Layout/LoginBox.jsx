@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import * as Login from '../../Components/Helpers/Login'
 
-export const LoginBox = () => {
+const LoginBox = () => {
 
 	let navigate = useNavigate();
 	let location = useLocation();
@@ -11,29 +11,23 @@ export const LoginBox = () => {
 
 	const handleSubmit = ( e ) => {
 		e.preventDefault();
+
+		localStorage.removeItem('username')
+		localStorage.removeItem('userId')
+
 		Login.login( e.target )
 			.then( res => {
+				console.log(res)
+				localStorage.setItem('username', res.username)
+				localStorage.setItem('userId', res.user_id)
 				navigate( from, { replace: true } );
-			}
-		)
+			} )
 	}
 
 	return (
 		<>
-			{/* <p>You must log in to view the page at {from}</p> */}
 			<section>
 				<div className="wrapper">
-					<div className="colWrap">
-						<div className='bgCol'></div>
-						<div className='col2'></div>
-						<div className='col3'></div>
-						<div className='col4'></div>
-						<div className='col5'></div>
-						<div className='col6'></div>
-						<div className='col7'></div>
-						<div className='col8'></div>
-						<div className='col9'></div>
-					</div>
 					<form className="loginForm" onSubmit={ handleSubmit }>
 						<h1>Login</h1>
 						<div className="formWrapper">
@@ -43,10 +37,11 @@ export const LoginBox = () => {
 							<div className="txtBox">
 								<input type="password" id="password" name="password" placeholder='******' />
 							</div>
-							<input type="submit" className="logBtn" value="Login" />
+							<input type="submit" className="logBtn"  defaultValue="Login" />
 							<div className="bottomText">
 								<span>Don't have account?</span>
-								<a href="#">Sign up now</a>
+								{/* <a href="#">Sign up now</a> */}
+								<Link to="/signup" >Sign up now</Link>
 							</div>
 						</div>
 					</form>
@@ -55,3 +50,5 @@ export const LoginBox = () => {
 		</>
 	)
 }
+
+export default LoginBox
