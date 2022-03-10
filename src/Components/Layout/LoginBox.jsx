@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-	BrowserRouter,
-	Route,
-	Routes,
-	Link,
-	useNavigate,
-	useLocation,
-	Navigate,
-	Outlet
-} from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import * as Login from '../../Components/Helpers/Login'
 
 export const LoginBox = () => {
@@ -16,18 +7,20 @@ export const LoginBox = () => {
 	let navigate = useNavigate();
 	let location = useLocation();
 
-	let from = location.pathname || "/";
+	let from = location.state?.name || "/";
 
-	function handleSubmit ( e ) {
+	const handleSubmit = ( e ) => {
 		e.preventDefault();
-		Login.login( e.currentTarget ).then( res => {
-			navigate( from, { replace: true } );
-		} )
+		Login.login( e.target )
+			.then( res => {
+				navigate( from, { replace: true } );
+			}
+		)
 	}
 
 	return (
 		<>
-			<p>You must log in to view the page at { from }</p>
+			{/* <p>You must log in to view the page at {from}</p> */}
 			<section>
 				<div className="wrapper">
 					<div className="colWrap">
