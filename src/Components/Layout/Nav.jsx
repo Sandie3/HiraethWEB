@@ -1,25 +1,29 @@
 import React from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import * as Login from '../Helpers/Login'
 
 const Nav = ( props ) => {
 
 	let navigate = useNavigate();
 
-	console.log( props )
-
 	let user;
 	localStorage.getItem( 'username' )
 	user = localStorage.getItem( 'username' )
 
 	const handleLogout = ( e ) => {
-		e.preventDefault();
 		Login.logout()
 			.then( res => {
-				localStorage.removeItem( 'username' )
-				localStorage.removeItem( 'userId' )
-				navigate( "/", { replace: true } )
-				console.log( res )
+				if ( res ) {
+					localStorage.removeItem( 'username' )
+					localStorage.removeItem( 'userId' )
+					navigate( "/", { replace: true } )
+					setTimeout(() => {
+						document.location.reload( true )
+					}, 500);
+				} else {
+					e.preventDefault();
+				}
+				console.log(res)
 			} )
 	}
 

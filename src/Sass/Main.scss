@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import './base/reset.scss';
+@import './base/typography.scss';
 
 ::-webkit-scrollbar {
 	background-color: #151d1c;
@@ -88,19 +89,16 @@ $col9: #ee3835;
 
 html {
 	background-color: $bgCol;
+	font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	color: $col7;
 }
 
 .displayNone{
 	display: none;
-}
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
-	text-decoration: none;
-	color: $col7;
 }
 
 nav{

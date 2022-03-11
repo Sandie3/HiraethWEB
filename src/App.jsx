@@ -18,25 +18,25 @@ import AdminLayout from './Components/Layout/AdminLayout'
 import AdminHome from './Components/Pages/Admin/AdminHome'
 
 import { loggedin } from './Components/Helpers/Login';
-import { getUser } from './Components/Helpers/User';
 
 import './Sass/Main.scss';
 
 function App () {
 
-	const [ isLoggedIn, setIsLoggedIn ] = useState( null )
+	const [ isLoggedIn, setIsLoggedIn ] = useState()
 
 	useEffect( () => {
-
 		loggedin().then( res => {
-			if ( res.login == true ) {
-				setIsLoggedIn( true )
-				// console.log(res)
-			} else {
-				setIsLoggedIn( false )
-			}
+			setTimeout( () => {
+				if ( res.login == true ) {
+					setIsLoggedIn( true )
+				} else {
+					setIsLoggedIn( false )
+					localStorage.removeItem( 'username' )
+					localStorage.removeItem( 'userId' )
+				}
+			}, 500 );
 		} )
-
 	}, [] )
 
 

@@ -4,6 +4,8 @@ import * as Login from '../../Components/Helpers/Login'
 
 const LoginBox = () => {
 
+	const [ err, setErr ] = useState()
+
 	let navigate = useNavigate();
 	let location = useLocation();
 
@@ -12,15 +14,22 @@ const LoginBox = () => {
 	const handleSubmit = ( e ) => {
 		e.preventDefault();
 
-		localStorage.removeItem('username')
-		localStorage.removeItem('userId')
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
 
 		Login.login( e.target )
 			.then( res => {
-				console.log(res)
-				localStorage.setItem('username', res.username)
-				localStorage.setItem('userId', res.user_id)
-				navigate( from, { replace: true } );
+				if ( res.login == true ) {
+					localStorage.setItem( 'username', res.username )
+					localStorage.setItem( 'userId', res.user_id )
+					navigate( from, { replace: true } )
+					setTimeout( () => {
+						document.location.reload( true )
+					}, 500 );
+
+				} else if ( res.login == false ) {
+					setErr( res.message )
+				}
 			} )
 	}
 
@@ -37,10 +46,10 @@ const LoginBox = () => {
 							<div className="txtBox">
 								<input type="password" id="password" name="password" placeholder='******' />
 							</div>
-							<input type="submit" className="logBtn"  defaultValue="Login" />
+							<input type="submit" className="logBtn" defaultValue="Login" />
 							<div className="bottomText">
 								<span>Don't have account?</span>
-								{/* <a href="#">Sign up now</a> */}
+								{/* <a href="#">Sign up now</a> */ }
 								<Link to="/signup" >Sign up now</Link>
 							</div>
 						</div>
