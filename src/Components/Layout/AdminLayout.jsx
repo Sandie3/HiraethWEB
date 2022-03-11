@@ -1,12 +1,20 @@
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
 
-const AdminLayout = ( props ) => {
-	let navigate = useNavigate()
+import { LoginContext } from '../Context/LoginContext';
+
+const AdminLayout = ( ) => {
+
+	const { loggedIn } = useContext(LoginContext)
+
+	if (!loggedIn) {
+		return <Navigate to="/login" replace />
+	}
+
 	return (
-		<>
-			{ props.loggedIn ? <Outlet /> : navigate( "/", { replace: true } ) }
-		</>
+
+			<Outlet /> 
+
 	)
 }
 

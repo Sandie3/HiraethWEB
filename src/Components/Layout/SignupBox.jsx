@@ -7,6 +7,7 @@ const SignupBox = () => {
 	let navigate = useNavigate();
 
 	const [ displayName, setDisplayName ] = useState()
+	const [ err, setErr ] = useState()
 
 	const handleSubmit = ( e ) => {
 		e.preventDefault();
@@ -15,13 +16,14 @@ const SignupBox = () => {
 		User.createUser( e.target )
 			.then( res => {
 				if ( res ) {
-					console.log( res )
 					localStorage.setItem( 'username', res.username )
 					localStorage.setItem( 'userId', res.user_id )
 					navigate( "/", { replace: true } );
-
+					setTimeout( () => {
+						document.location.reload( true )
+					}, 500 );
 				} else {
-					console.log( res )
+					setErr('ERROR')
 				}
 			} )
 	}

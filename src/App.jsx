@@ -17,63 +17,47 @@ import Profile from './Components/Pages/Profile'
 import AdminLayout from './Components/Layout/AdminLayout'
 import AdminHome from './Components/Pages/Admin/AdminHome'
 
-import { loggedin } from './Components/Helpers/Login';
-import { getUser } from './Components/Helpers/User';
-
 import './Sass/Main.scss';
+
+import LoginContextProvider from './Components/Context/LoginContext';
 
 function App () {
 
-	const [ isLoggedIn, setIsLoggedIn ] = useState( null )
-
-	useEffect( () => {
-
-		loggedin().then( res => {
-			if ( res.login == true ) {
-				setIsLoggedIn( true )
-				// console.log(res)
-			} else {
-				setIsLoggedIn( false )
-			}
-		} )
-
-	}, [] )
-
-
 	return (
 		<BrowserRouter>
-			<div className="colWrap">
-				<div className='bgCol'></div>
-				<div className='col2'></div>
-				<div className='col3'></div>
-				<div className='col4'></div>
-				<div className='col5'></div>
-				<div className='col6'></div>
-				<div className='col7'></div>
-				<div className='col8'></div>
-				<div className='col9'></div>
-			</div>
-			<Routes>
+			<LoginContextProvider>
+				<div className="colWrap">
+					<div className='bgCol'></div>
+					<div className='col2'></div>
+					<div className='col3'></div>
+					<div className='col4'></div>
+					<div className='col5'></div>
+					<div className='col6'></div>
+					<div className='col7'></div>
+					<div className='col8'></div>
+					<div className='col9'></div>
+				</div>
+				<Routes>
 
-				<Route path="/" element={ <Layout loggedIn={ isLoggedIn } /> }>
-					<Route index element={ <Dashboard /> } />
-					<Route path="/login" element={ isLoggedIn ? <NoPage /> : <Login /> } />
-					<Route path="/signup" element={ isLoggedIn ? <NoPage /> : <Signup /> } />
-					<Route path='*' element={ <NoPage /> } />
-				</Route>
+					<Route path="/" element={ <Layout /> }>
+						<Route index element={ <Dashboard /> } />
+						<Route path="/login" element={ <Login /> } />
+						<Route path="/signup" element={ <Signup /> } />
+						<Route path='*' element={ <NoPage /> } />
+					</Route>
 
-				<Route path="/user" element={ <Layout loggedIn={ isLoggedIn } /> }>
-					{/* <Route path=":user" element={ !isLoggedIn ? <Profile /> : <Profile user={ 'sandie' } /> } /> */ }
-					<Route path=":user" element={ <Profile /> } />
-					<Route path='*' element={ <NoPage /> } />
-				</Route>
+					<Route path="/user" element={ <Layout /> }>
+						<Route path=":user" element={ <Profile /> } />
+						<Route path='*' element={ <NoPage /> } />
+					</Route>
 
-				<Route path="/admin" element={ <AdminLayout loggedIn={ isLoggedIn } /> }>
-					<Route index element={ <AdminHome /> } />
-					<Route path='*' element={ <NoPage /> } />
-				</Route>
+					<Route path="/admin" element={ <AdminLayout /> }>
+						<Route index element={ <AdminHome /> } />
+						<Route path='*' element={ <NoPage /> } />
+					</Route>
 
-			</Routes>
+				</Routes>
+			</LoginContextProvider>
 		</BrowserRouter>
 	);
 }
