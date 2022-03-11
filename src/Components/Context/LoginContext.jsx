@@ -13,7 +13,6 @@ const LoginContextProvider = ( props ) => {
 	let navigate = useNavigate();
 	let location = useLocation();
 
-
 	let signin = ( e ) => {
 		e.preventDefault();
 		Login.login( e.target )
@@ -37,10 +36,10 @@ const LoginContextProvider = ( props ) => {
 			if ( res.login == false ) {
 				localStorage.removeItem( 'username' )
 				localStorage.removeItem( 'userId' )
-				navigate( "/login", { replace: true } )
-				setTimeout( () => {
-					document.location.reload( true )
-				}, 500 );
+				// navigate( "/login", { replace: true } )
+				// setTimeout( () => {
+				// 	document.location.reload( true )
+				// }, 500 );
 			} else {
 				setMessage( res.message )
 			}
