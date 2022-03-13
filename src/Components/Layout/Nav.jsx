@@ -1,55 +1,36 @@
-import React from 'react'
-import { Link, useNavigate  } from 'react-router-dom';
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { LoginContext } from '../Context/LoginContext';
 import * as Login from '../Helpers/Login'
 
-const Nav = ( props ) => {
+const Nav = () => {
 
-	let navigate = useNavigate();
+	const { signout, loggedIn } = useContext( LoginContext )
 
+	let findUser = localStorage.getItem('username');
 	let user;
-	localStorage.getItem( 'username' )
-	user = localStorage.getItem( 'username' )
-
-	const handleLogout = ( e ) => {
-		Login.logout()
-			.then( res => {
-				if ( res ) {
-					localStorage.removeItem( 'username' )
-					localStorage.removeItem( 'userId' )
-					navigate( "/", { replace: true } )
-					setTimeout(() => {
-						document.location.reload( true )
-					}, 500);
-				} else {
-					e.preventDefault();
-				}
-				console.log(res)
-			} )
+	if (findUser != undefined || findUser != null) {
+		user = findUser;
 	}
+
 
 	return (
 		<nav>
 			<Link to="/" className='navLink'>Home</Link>
 			{
-				!props.loggedIn.loggedIn
-					?
-					<>
-						<Link to="/login" className='navLink'>Login</Link>
-					</>
-					:
-					<>
-						<Link to="/admin" className='navLink'>Admin</Link>
-						<Link to={ "/user/" + user } className='navLink'>Profile</Link>
-						<a className="navLink" onClick={ handleLogout }>Logout</a>
-					</>
-			}
-			{/* {
-				props.loggedIn.loggedIn &&
+				loggedIn &&
 				<>
+					<Link to="/admin" className='navLink'>Admin</Link>
 					<Link to={ "/user/" + user } className='navLink'>Profile</Link>
-					<button type="submit" className="navLink" onClick={ handleLogout }>Logout</button>
+					<button type="submit" className="navLink" onClick={ signout }>Logout</button>
 				</>
-			} */}
+			}
+			{
+				!loggedIn &&
+				<>
+					<Link to="/login" className='navLink'>Login</Link>
+				</>
+			}
 		</nav>
 	)
 }
