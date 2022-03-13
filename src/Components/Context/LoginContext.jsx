@@ -10,9 +10,6 @@ const LoginContextProvider = ( props ) => {
 	const [ loggedIn, setloggedIn ] = useState( null )
 	const [ message, setMessage ] = useState()
 
-	let navigate = useNavigate();
-	let location = useLocation();
-
 	let signin = ( e ) => {
 		e.preventDefault();
 		Login.login( e.target )
