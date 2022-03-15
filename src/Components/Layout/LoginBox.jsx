@@ -15,30 +15,12 @@ const LoginBox = () => {
 
 	const handleSubmit = async ( e ) => {
 		e.preventDefault();
-
-		localStorage.removeItem( 'username' )
-		localStorage.removeItem( 'userId' )
-
 		await signin( e )
 		navigate( "/", { replace: true } )
 		setTimeout( () => {
 			document.location.reload( true )
 		}, 500 );
 
-		// Login.login( e.target )
-		// 	.then( res => {
-		// 		if ( res ) {
-		// 			localStorage.setItem( 'username', res.username )
-		// 			localStorage.setItem( 'userId', res.user_id )
-		// 			navigate( from, { replace: true } )
-		// 			setTimeout( () => {
-		// 				document.location.reload( true )
-		// 			}, 500 );
-
-		// 		} else {
-		// 			setErr( res.message )
-		// 		}
-		// 	} )
 	}
 
 	return (

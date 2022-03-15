@@ -12,6 +12,8 @@ const LoginContextProvider = ( props ) => {
 
 	let signin = ( e ) => {
 		e.preventDefault();
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
 		Login.login( e.target )
 			.then( res => {
 				if ( res.login == true ) {
@@ -28,15 +30,11 @@ const LoginContextProvider = ( props ) => {
 	};
 
 	// callback
-	let signout = ( e ) => {
+	let signout = () => {
 		Login.logout().then( res => {
 			if ( res.login == false ) {
 				localStorage.removeItem( 'username' )
 				localStorage.removeItem( 'userId' )
-				// navigate( "/login", { replace: true } )
-				// setTimeout( () => {
-				// 	document.location.reload( true )
-				// }, 500 );
 			} else {
 				setMessage( res.message )
 			}
