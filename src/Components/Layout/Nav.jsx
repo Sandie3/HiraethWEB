@@ -31,7 +31,8 @@ const Nav = () => {
 				loggedIn &&
 				<>
 					<Link to="/admin" className='navLink'>Admin</Link>
-					<Link to={ "/user/" + user } className='navLink'>Profile</Link>
+					{/* <Link to={ "/user/" + user } className='navLink'>Profile</Link> */}
+					<Link to={ user } className='navLink'>Profile</Link>
 					<button type="submit" className="navLink" onClick={ handleLogout }>Logout</button>
 				</>
 			}
