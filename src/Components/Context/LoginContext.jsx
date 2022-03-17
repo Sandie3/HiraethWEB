@@ -11,6 +11,8 @@ const LoginContextProvider = ( props ) => {
 
 	let signin = ( e ) => {
 		e.preventDefault();
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
 		Login.login( e.target )
 			.then( res => {
 				if ( res.login == true ) {
