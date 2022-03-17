@@ -1,5 +1,4 @@
 import { useState, createContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import * as Login from '../Helpers/Login'
 
 export const LoginContext = createContext()
@@ -27,16 +26,11 @@ const LoginContextProvider = ( props ) => {
 			} )
 	};
 
-	// callback
 	let signout = ( e ) => {
 		Login.logout().then( res => {
 			if ( res.login == false ) {
 				localStorage.removeItem( 'username' )
 				localStorage.removeItem( 'userId' )
-				// navigate( "/login", { replace: true } )
-				// setTimeout( () => {
-				// 	document.location.reload( true )
-				// }, 500 );
 			} else {
 				setMessage( res.message )
 			}
