@@ -16,8 +16,9 @@ const SignupBox = () => {
 		User.createUser( e.target )
 			.then( res => {
 				if ( res ) {
-					localStorage.setItem( 'username', res.username )
-					localStorage.setItem( 'userId', res.user_id )
+					console.log(res)
+					localStorage.setItem( 'username', res.created.username )
+					localStorage.setItem( 'userId', res.created._id )
 					navigate( "/", { replace: true } );
 					setTimeout( () => {
 						document.location.reload( true )

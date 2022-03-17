@@ -20,7 +20,7 @@ import AdminHome from './Components/Pages/Admin/AdminHome'
 
 import './Sass/Main.scss';
 
-function App () {
+function App() {
 
 
 	return (
@@ -39,21 +39,22 @@ function App () {
 				</div>
 				<Routes>
 
-					<Route path="/" element={ <Layout /> }>
-						<Route index element={ <Dashboard /> } />
-						<Route path="/login" element={ <Login /> } />
-						<Route path="/signup" element={ <Signup /> } />
-						<Route path='*' element={ <NoPage /> } />
+					<Route path="/" element={<Layout />}>
+						<Route index element={<Dashboard />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/signup" element={<Signup />} />
+						<Route path=":user" element={<Profile />} />
+						<Route path='*' element={<NoPage />} />
 					</Route>
 
-					<Route path="/user" element={ <Layout /> }>
+					{/* <Route path="/user" element={ <Layout /> }>
 						<Route path=":user" element={ <Profile /> } />
 						<Route path='*' element={ <NoPage /> } />
-					</Route>
+					</Route> */}
 
-					<Route path="/admin" element={ <AdminLayout /> }>
-						<Route index element={ <AdminHome /> } />
-						<Route path='*' element={ <NoPage /> } />
+					<Route path="/admin" element={<AdminLayout />}>
+						<Route index element={<AdminHome />} />
+						<Route path='*' element={<NoPage />} />
 					</Route>
 
 				</Routes>
