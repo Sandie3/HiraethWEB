@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../Context/LoginContext';
-import * as Login from '../Helpers/Login'
 
 const Nav = () => {
 
@@ -9,9 +8,9 @@ const Nav = () => {
 
 	let navigate = useNavigate();
 
-	let findUser = localStorage.getItem('username');
+	let findUser = localStorage.getItem( 'username' );
 	let user;
-	if (findUser != undefined || findUser != null) {
+	if ( findUser != undefined || findUser != null ) {
 		user = findUser;
 	}
 
@@ -26,22 +25,24 @@ const Nav = () => {
 
 	return (
 		<nav>
-			<Link to="/" className='navLink'>Home</Link>
-			{
-				loggedIn &&
-				<>
-					<Link to="/admin" className='navLink'>Admin</Link>
-					{/* <Link to={ "/user/" + user } className='navLink'>Profile</Link> */}
-					<Link to={ user } className='navLink'>Profile</Link>
-					<button type="submit" className="navLink" onClick={ handleLogout }>Logout</button>
-				</>
-			}
-			{
-				!loggedIn &&
-				<>
-					<Link to="/login" className='navLink'>Login</Link>
-				</>
-			}
+			<div className="navWrap">
+				<Link to="/" className='navLink'>Home</Link>
+				{
+					loggedIn &&
+					<>
+						<Link to="/admin" className='navLink'>Admin</Link>
+						{/* <Link to={ "/user/" + user } className='navLink'>Profile</Link> */ }
+						<Link to={ user } className='navLink'>Profile</Link>
+						<button type="submit" className="navLink" onClick={ handleLogout }>Logout</button>
+					</>
+				}
+				{
+					!loggedIn &&
+					<>
+						<Link to="/login" className='navLink'>Login</Link>
+					</>
+				}
+			</div>
 		</nav>
 	)
 }

@@ -1,6 +1,6 @@
-@import './base/reset.scss';
-@import './base/typography.scss';
-@import './utilities/variables.scss';
+@import "./base/reset.scss";
+@import "./base/typography.scss";
+@import "./utilities/variables.scss";
 
 ::-webkit-scrollbar {
 	background-color: #151d1c;
@@ -14,67 +14,12 @@
 	background-color: #606060;
 }
 
-::-webkit-scrollbar-button{
+::-webkit-scrollbar-button {
 	background-color: #3a3a3a;
 }
 
-::-webkit-scrollbar-track-piece{
+::-webkit-scrollbar-track-piece {
 	background-color: #888888;
-}
-
-.colWrap {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	padding: 10px;
-	background-color: #fff;
-	// display: flex;
-	// display: none;
-	.bgCol {
-		background-color: $bgCol;
-		width: 20px;
-		height: 20px;
-	}
-	.col2 {
-		background-color: $col2;
-		width: 20px;
-		height: 20px;
-	}
-	.col3 {
-		background-color: $col3;
-		width: 20px;
-		height: 20px;
-	}
-	.col4 {
-		background-color: $col4;
-		width: 20px;
-		height: 20px;
-	}
-	.col5 {
-		background-color: $col5;
-		width: 20px;
-		height: 20px;
-	}
-	.col6 {
-		background-color: $col6;
-		width: 20px;
-		height: 20px;
-	}
-	.col7 {
-		background-color: $col7;
-		width: 20px;
-		height: 20px;
-	}
-	.col8 {
-		background-color: $col8;
-		width: 20px;
-		height: 20px;
-	}
-	.col9 {
-		background-color: $col9;
-		width: 20px;
-		height: 20px;
-	}
 }
 
 html {
@@ -87,27 +32,38 @@ html {
 	color: $col7;
 }
 
-.displayNone{
+.displayNone {
 	display: none;
 }
 
-nav{
+nav {
 	width: 100%;
 	height: 5vh;
 	display: block;
-	background-color: $col2;
+	background-color: $col3;
 	display: flex;
-	.navLink{
-		display: block;
-		border: none;
-		color: $col8;
-		text-decoration: none;
-		background: none;
-
-		align-self: center;
-		margin: 0 0 0 auto;
-		padding-right: 10px;
-		font-size: 12px;
+	justify-content: flex-end;
+	.navWrap {
+	display: flex;
+	width: min-content;
+	flex-direction: row;
+	box-sizing: border-box;
+		.navLink {
+			display: block;
+			border: none;
+			color: $col8;
+			text-decoration: none;
+			background: none;
+			align-self: center;
+			margin: 0 0 0 auto;
+			padding: 5px 10px;
+			margin: 0 5px;
+			font-size: 12px;
+		}
+		button{
+			padding: 0;
+			cursor: pointer;
+		}
 	}
 }
 
@@ -115,7 +71,7 @@ section {
 	padding: 2rem 4rem;
 	width: 100%;
 	height: 95vh;
-	background: url('../Images/bgweb2.png') no-repeat center bottom;
+	background: url("../Images/bgweb2.png") no-repeat center bottom;
 	background-size: contain;
 	background-attachment: fixed;
 	background-blend-mode: multiply;
@@ -127,61 +83,5 @@ section {
 	display: flex;
 }
 
-.loginForm {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	h1 {
-		font-size: 20px;
-		background-color: $col2;
-		padding: 0.5rem;
-		text-align: center;
-		color: $col5;
-	}
-	.formWrapper {
-		background: $col3;
-		padding: 1rem;
-		.txtBox {
-			input {
-				margin-bottom: 1em;
-				padding: 0.5em 0.7em;
-				border: none;
-				border-bottom: 1px solid rgb(197, 197, 197);
-				color: $col3;
-				&:focus-visible {
-					outline: 2px solid $col8;
-				}
-				&:focus {
-					&::placeholder {
-						color: $col7;
-					}
-				}
-			}
-		}
-		.logBtn {
-			border: none;
-			background-color: $col8;
-			display: block;
-			margin-bottom: 0.5em;
-			padding: 0.5em 1em;
-			font-size: 1rem;
-			border-radius: 5px;
-			width: 100%;
-			color: $col7;
-			text-align: center;
-			cursor: pointer;
-		}
-		.bottomText {
-			font-size: 12px;
-			text-align: center;
-			span {
-				display: block;
-				color: $col5;
-			}
-			a {
-				color: $col8;
-			}
-		}
-	}
-}
+@import "./pages/LoginSignup.scss";
+@import "./pages/Profile.scss";

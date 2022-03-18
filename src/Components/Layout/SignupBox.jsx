@@ -45,7 +45,7 @@ const SignupBox = () => {
 						<div className="txtBox">
 							<input type="password" id="password" name="password" placeholder='******' />
 						</div>
-						<input type="submit" className="logBtn" value="Login" />
+						<input type="submit" className="logBtn" value="Signup" />
 						<div className="bottomText">
 							<Link to="/login" >Go back</Link>
 						</div>

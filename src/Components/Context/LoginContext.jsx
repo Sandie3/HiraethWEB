@@ -1,13 +1,16 @@
 import { useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom'
 import * as Login from '../Helpers/Login'
 
 export const LoginContext = createContext()
 
 const LoginContextProvider = ( props ) => {
 
-	let [ user, setUser ] = useState( null );
+	let [ user, setUser ] = useState( null )
 	const [ loggedIn, setloggedIn ] = useState( null )
 	const [ message, setMessage ] = useState()
+
+	let navigate = useNavigate()
 
 	let signin = ( e ) => {
 		e.preventDefault();
@@ -46,8 +49,10 @@ const LoginContextProvider = ( props ) => {
 	let isLoggedIn = () => {
 		Login.loggedin().then( res => {
 			if ( res.login == true ) {
+				// return true;
 				setloggedIn( true )
 			} else if ( res.login == false ) {
+				// return false;
 				setloggedIn( false )
 			}
 		} )

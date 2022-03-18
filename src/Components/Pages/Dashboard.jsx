@@ -29,8 +29,8 @@ const Dashboard = () => {
 				users &&
 				users.map( ( u, i ) => {
 					return (
-						<Fragment key={i}>
-							<Link to={ "user/" + u.username }>{ u.username }</Link><br />
+						<Fragment key={ i }>
+							<Link to={ u.username }>{ u.username }</Link><br />
 						</Fragment>
 					)
 				} )
