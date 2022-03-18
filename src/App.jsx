@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 import NoPage from './Components/Pages/NoPage'
+import LoginContextProvider from './Components/Context/LoginContext';
 
 import Layout from './Components/Layout/Layout'
 import Dashboard from './Components/Pages/Dashboard'
@@ -39,21 +40,22 @@ function App () {
 				</div>
 				<Routes>
 
-					<Route path="/" element={ <Layout /> }>
-						<Route index element={ <Dashboard /> } />
-						<Route path="/login" element={ <Login /> } />
-						<Route path="/signup" element={ <Signup /> } />
-						<Route path='*' element={ <NoPage /> } />
+					<Route path="/" element={<Layout />}>
+						<Route index element={<Dashboard />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/signup" element={<Signup />} />
+						<Route path=":user" element={<Profile />} />
+						<Route path='*' element={<NoPage />} />
 					</Route>
 
-					<Route path="/user" element={ <Layout /> }>
+					{/* <Route path="/user" element={ <Layout /> }>
 						<Route path=":user" element={ <Profile /> } />
 						<Route path='*' element={ <NoPage /> } />
-					</Route>
+					</Route> */}
 
-					<Route path="/admin" element={ <AdminLayout /> }>
-						<Route index element={ <AdminHome /> } />
-						<Route path='*' element={ <NoPage /> } />
+					<Route path="/admin" element={<AdminLayout />}>
+						<Route index element={<AdminHome />} />
+						<Route path='*' element={<NoPage />} />
 					</Route>
 
 				</Routes>

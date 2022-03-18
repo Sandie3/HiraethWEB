@@ -1,5 +1,4 @@
 import { useState, createContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import * as Login from '../Helpers/Login'
 
 export const LoginContext = createContext()
@@ -10,12 +9,10 @@ const LoginContextProvider = ( props ) => {
 	const [ loggedIn, setloggedIn ] = useState( null )
 	const [ message, setMessage ] = useState()
 
-	let navigate = useNavigate();
-	let location = useLocation();
-
-
 	let signin = ( e ) => {
 		e.preventDefault();
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
 		Login.login( e.target )
 			.then( res => {
 				if ( res.login == true ) {
@@ -31,7 +28,6 @@ const LoginContextProvider = ( props ) => {
 			} )
 	};
 
-	// callback
 	let signout = ( e ) => {
 		Login.logout().then( res => {
 			if ( res.login == false ) {

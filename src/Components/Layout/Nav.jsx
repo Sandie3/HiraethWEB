@@ -7,10 +7,20 @@ const Nav = () => {
 
 	const { signout, loggedIn } = useContext( LoginContext )
 
+	let navigate = useNavigate();
+
 	let findUser = localStorage.getItem('username');
 	let user;
 	if (findUser != undefined || findUser != null) {
 		user = findUser;
+	}
+
+	const handleLogout = async () => {
+		await signout()
+		navigate( "/", { replace: true } )
+		setTimeout( () => {
+			document.location.reload( true )
+		}, 500 );
 	}
 
 
@@ -21,8 +31,9 @@ const Nav = () => {
 				loggedIn &&
 				<>
 					<Link to="/admin" className='navLink'>Admin</Link>
-					<Link to={ "/user/" + user } className='navLink'>Profile</Link>
-					<button type="submit" className="navLink" onClick={ signout }>Logout</button>
+					{/* <Link to={ "/user/" + user } className='navLink'>Profile</Link> */}
+					<Link to={ user } className='navLink'>Profile</Link>
+					<button type="submit" className="navLink" onClick={ handleLogout }>Logout</button>
 				</>
 			}
 			{

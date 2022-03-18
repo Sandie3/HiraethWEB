@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Link, Navigate } from 'react-router-dom'
-import * as Login from '../../Components/Helpers/Login'
 import { LoginContext } from '../Context/LoginContext'
 
 const LoginBox = () => {
 
-	const { signin, user } = useContext( LoginContext )
+	const { signin, loggedIn } = useContext( LoginContext )
 
 	const [ err, setErr ] = useState()
 
@@ -14,37 +13,20 @@ const LoginBox = () => {
 
 	let from = location.state?.name || "/";
 
-	const handleSubmit = ( e ) => {
+	const handleSubmit = async ( e ) => {
 		e.preventDefault();
+		await signin( e )
+		navigate( "/", { replace: true } )
+		setTimeout( () => {
+			document.location.reload( true )
+		}, 500 );
 
-		localStorage.removeItem( 'username' )
-		localStorage.removeItem( 'userId' )
-
-		let email = e.target.email.value
-		let pwd = e.target.password.value
-
-		signin( e )
-
-		// Login.login( e.target )
-		// 	.then( res => {
-		// 		if ( res ) {
-		// 			localStorage.setItem( 'username', res.username )
-		// 			localStorage.setItem( 'userId', res.user_id )
-		// 			navigate( from, { replace: true } )
-		// 			setTimeout( () => {
-		// 				document.location.reload( true )
-		// 			}, 500 );
-
-		// 		} else {
-		// 			setErr( res.message )
-		// 		}
-		// 	} )
 	}
 
 	return (
 		<>
 			{
-				!user &&
+				!loggedIn &&
 				<section>
 					<div className="wrapper">
 						<form className="loginForm" onSubmit={ handleSubmit }>
@@ -68,7 +50,7 @@ const LoginBox = () => {
 				</section >
 			}
 			{
-				user && <Navigate to="/" replace />
+				loggedIn && <Navigate to="/" replace />
 			}
 		</>
 	)
