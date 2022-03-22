@@ -10,8 +10,8 @@ import LoginContextProvider from './Components/Context/LoginContext';
 
 import Layout from './Components/Layout/Layout'
 import Dashboard from './Components/Pages/Dashboard'
-import Login from './Components/Layout/LoginBox'
-import Signup from './Components/Layout/SignupBox'
+import Login from './Components/Pages/Login'
+import Signup from './Components/Pages/Signup'
 
 import Profile from './Components/Pages/Profile'
 
@@ -30,7 +30,7 @@ function App () {
 						<Route index element={ <Dashboard /> } />
 						<Route path="/login" element={ <Login /> } />
 						<Route path="/signup" element={ <Signup /> } />
-						<Route path=":user" element={ <Profile /> } />
+						<Route path="/u/:user" element={ <Profile /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
 					<Route path="/admin" element={ <AdminLayout /> }>

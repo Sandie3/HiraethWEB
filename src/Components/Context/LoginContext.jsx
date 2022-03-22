@@ -1,6 +1,7 @@
 import { useState, createContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import * as Login from '../Helpers/Login'
+import { createUser } from '../Helpers/User';
 
 export const LoginContext = createContext()
 
@@ -46,6 +47,25 @@ const LoginContextProvider = ( props ) => {
 		} )
 	};
 
+	let signUp = ( e ) => {
+		e.preventDefault();
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
+		createUser(e).then( res => {
+			if (res.login == false) {
+				console.log( res )
+					localStorage.setItem( 'username', res.created.username )
+					localStorage.setItem( 'userId', res.created._id )
+					navigate( "/", { replace: true } );
+					setTimeout( () => {
+						document.location.reload( true )
+					}, 500 );
+			}else{
+				setMessage( res.message )
+			}
+		} )
+	}
+
 	let isLoggedIn = () => {
 		Login.loggedin().then( res => {
 			if ( res.login == true ) {
@@ -60,7 +80,7 @@ const LoginContextProvider = ( props ) => {
 	isLoggedIn();
 
 	return (
-		<LoginContext.Provider value={ { user, loggedIn, message, signin, signout } }>
+		<LoginContext.Provider value={ { user, loggedIn, message, signin, signout, signUp } }>
 			{ props.children }
 		</LoginContext.Provider>
 	)

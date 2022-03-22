@@ -45,18 +45,53 @@
 				width: 100%;
 				height: auto;
 				padding: 5% 3%;
-				p:first-child{
+				p:first-child {
 					color: $col6;
 				}
-				p{
+				p {
 					color: $col4;
 				}
 			}
 		}
-		.userBio{
-			background-color: $col2;
-			padding: 0.5em;
-			color: $col4;
+		.userBio {
+			display: block;
+			width: 100%;
+			height: auto;
+			div {
+				padding: 0.5em;
+				background-color: $col2;
+				width: 100%;
+				box-sizing: border-box;
+				height: max-content;
+				color: $col4;
+			}
+			form {
+				position: relative;
+				textarea {
+					display: block;
+					background-color: $col2;
+					resize: none;
+					border: none;
+					width: 100%;
+					box-sizing: border-box;
+					height: max-content;
+					padding: 0.5em;
+					color: $col4;
+				}
+				input#edit,
+				input#update {
+					position: absolute;
+					top: 10%;
+					right: 2%;
+					border: none;
+					background: none;
+					display: none;
+					color: $col5;
+				}
+				.active {
+					display: block !important;
+				}
+			}
 		}
 	}
 }

@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useLocation, Link, Navigate } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { useNavigate, Link, Navigate } from 'react-router-dom'
 import { LoginContext } from '../Context/LoginContext'
 
 const LoginBox = () => {
 
 	const { signin, loggedIn } = useContext( LoginContext )
 
-	const [ err, setErr ] = useState()
-
 	let navigate = useNavigate();
-	let location = useLocation();
-
-	let from = location.state?.name || "/";
 
 	const handleSubmit = async ( e ) => {
 		e.preventDefault();

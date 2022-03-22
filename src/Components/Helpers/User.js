@@ -44,3 +44,12 @@ export const createUser = async ( formData ) => {
 	return res;
 
 }
+
+export const editBio = async ( user, data ) => {
+
+	let res = await axios.put( api.baseUrl + 'user/' + user, data, { withCredentials: true } )
+		.then( res => { return res.data; } )
+		.catch( err => { return err.response.data } )
+	return res;
+
+}

@@ -30,6 +30,12 @@ html {
 	box-sizing: border-box;
 	text-decoration: none;
 	color: $col7;
+	background-image: url("../Images/bgweb2.png");
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-size: contain;
+	background-attachment: fixed;
+	background-blend-mode: multiply;
 }
 
 .displayNone {
@@ -71,10 +77,6 @@ section {
 	padding: 2rem 4rem;
 	width: 100%;
 	height: 95vh;
-	background: url("../Images/bgweb2.png") no-repeat center bottom;
-	background-size: contain;
-	background-attachment: fixed;
-	background-blend-mode: multiply;
 }
 
 .wrapper {
