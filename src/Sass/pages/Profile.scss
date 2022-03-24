@@ -22,12 +22,12 @@
 		padding: 1em;
 		display: flex;
 		flex-direction: column;
-		gap: 1em;
+		gap: 0.5em;
 		.userTop {
 			display: flex;
 			.userIcon {
 				min-width: 100px;
-				min-height: 100px;
+				max-height: 100px;
 				display: inline-block;
 				background-color: $col4;
 				border-radius: 50%;
@@ -57,7 +57,7 @@
 			display: block;
 			width: 100%;
 			height: auto;
-			div {
+			.bio {
 				padding: 0.5em;
 				background-color: $col2;
 				width: 100%;
@@ -74,23 +74,24 @@
 					border: none;
 					width: 100%;
 					box-sizing: border-box;
-					height: max-content;
+					// height: max-content;
 					padding: 0.5em;
 					color: $col4;
+					overflow: hidden;
 				}
 				input#edit,
 				input#update {
 					position: absolute;
-					top: 10%;
-					right: 2%;
+					top: 5px;
+					right: 5px;
 					border: none;
 					background: none;
 					display: none;
 					color: $col5;
 				}
-				.active {
-					display: block !important;
-				}
+			}
+			.active {
+				display: block !important;
 			}
 		}
 	}

@@ -16,6 +16,7 @@ const Profile = () => {
 		getUser( param.user ).then( res => {
 			if ( res ) {
 				setUser( res )
+				setBio( res.bio )
 				setErr( false )
 				setLoading( false )
 				getUserPfp( res.pfp[ 0 ] ).then( res => {
@@ -23,7 +24,7 @@ const Profile = () => {
 						if ( res.userPfp == "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
 						} else {
-							setUserIcon( imgUrl + "/icons/" + res.userPfp )
+							setUserIcon( imgUrl + res._id + "/icon/" + res.userPfp )
 						}
 						setErr()
 					} else {
@@ -41,17 +42,21 @@ const Profile = () => {
 
 	let updateBio = ( e ) => {
 		e.preventDefault()
+		let bioT = document.getElementById( "bio" )
 		document.querySelector( "#edit" ).classList.toggle( "active" )
 		document.querySelector( "#update" ).classList.toggle( "active" )
-		let bioT = document.getElementById( "bio" )
-		editBio( user._id, { "bio": bio } ).then( res => {
-			if ( res ) {
-				console.log( res )
-				bioT.disabled = true
-			} else {
-				console.log( "err" )
-			}
-		} )
+		if ( bio == user.bio ) {
+			bioT.disabled = true
+		} else {
+			editBio( user._id, { "bio": bio } ).then( res => {
+				if ( res ) {
+					console.log( res )
+					bioT.disabled = true
+				} else {
+					console.log( "err" )
+				}
+			} )
+		}
 	}
 
 	let activateEdit = ( e ) => {
@@ -61,6 +66,7 @@ const Profile = () => {
 		let bio = document.getElementById( "bio" )
 		bio.disabled = false;
 		bio.focus()
+		bio.style.height = bio.scrollHeight
 	}
 
 	return (
@@ -68,12 +74,6 @@ const Profile = () => {
 			{ user &&
 				<div className="profWrap">
 					<div className="userContent">
-						{/* <p>id: { user._id }</p>
-						<p>Email: { user.email }</p>
-						<p>Username: { user.username }</p>
-						<p>Bio: { user.bio === "" ? "Write something" : user.bio }</p>
-						<p>Posts: { user.posts.length }</p>
-						<img src={ userIcon } /> */}
 					</div>
 					<div className="userInfo">
 						<div className="userTop">
@@ -90,28 +90,21 @@ const Profile = () => {
 								localStorage.getItem( 'userId' ) == user._id ?
 									user.bio === "" ?
 										<form id='bioForm'>
-											<textarea name="bio" id="bio" placeholder="Write something about yourself..." onChange={ e => setBio( e.target.value ) } disabled ></textarea>
+											<textarea rows='1' name="bio" id="bio" placeholder="Write something about yourself..." onChange={ e => setBio( e.target.value ) } disabled ></textarea>
 											<input type="submit" value="Edit" id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } />
 											<input type="submit" value="Update" id="update" onClick={ ( e ) => updateBio( e ) } />
 										</form>
 										:
 										<form id='bioForm'>
-											<textarea name="bio" id="bio" defaultValue={ user.bio } onChange={ e => setBio( e.target.value ) } disabled ></textarea>
+											<textarea name="bio" id="bio" defaultValue={ bio } onChange={ e => setBio( e.target.value ) } disabled ></textarea>
 											<input type="submit" value="Edit" id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } />
 											<input type="submit" value="Update" id="update" onClick={ ( e ) => updateBio( e ) } />
 										</form>
 									:
 									<div className='bio'>
-										test
+										{ user.bio }
 									</div>
-
 							}
-							{/* {
-								localStorage.getItem( 'userId' ) != user._id &&
-								<div>
-									test
-								</div>
-							} */}
 						</div>
 					</div>
 				</div>

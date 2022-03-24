@@ -1,22 +1,35 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link, Navigate } from 'react-router-dom'
+import { createUser } from '../Helpers/User';
 import { LoginContext } from '../Context/LoginContext'
 
 const SignupBox = () => {
 
-	const { loggedIn, signUp } = useContext( LoginContext )
+	const { loggedIn } = useContext( LoginContext )
 
 	let navigate = useNavigate();
 
 	const [ displayName, setDisplayName ] = useState()
+	const [message, setMessage] = useState()
 
-	const handleSubmit = async ( e ) => {
+	let signUp = ( e ) => {
 		e.preventDefault();
-		await signUp( e )
-		navigate( "/", { replace: true } )
-		setTimeout( () => {
-			document.location.reload( true )
-		}, 500 );
+		localStorage.removeItem( 'username' )
+		localStorage.removeItem( 'userId' )
+		console.log(e.target)
+		createUser( e.target ).then( res => {
+			if ( res.login == false ) {
+				console.log( res )
+				localStorage.setItem( 'username', res.created.username )
+				localStorage.setItem( 'userId', res.created._id )
+				navigate( "/", { replace: true } );
+				setTimeout( () => {
+					document.location.reload( true )
+				}, 500 );
+			} else {
+				setMessage( res.message )
+			}
+		} )
 	}
 
 	return (
@@ -25,7 +38,7 @@ const SignupBox = () => {
 				!loggedIn &&
 				<section>
 					<div className="wrapper">
-						<form className="loginForm" onSubmit={ handleSubmit }>
+						<form className="loginForm" onSubmit={ signUp }>
 							<h1>Signup</h1>
 							<div className="formWrapper">
 								<div className="txtBox">
