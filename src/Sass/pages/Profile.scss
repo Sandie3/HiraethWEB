@@ -27,7 +27,7 @@
 			display: flex;
 			.userIcon {
 				min-width: 100px;
-				max-height: 100px;
+				height: 100px;
 				display: inline-block;
 				background-color: $col4;
 				border-radius: 50%;
@@ -38,6 +38,7 @@
 					height: 100%;
 					border-radius: 50%;
 					object-fit: cover;
+					object-position: center;
 				}
 			}
 			.userNames {

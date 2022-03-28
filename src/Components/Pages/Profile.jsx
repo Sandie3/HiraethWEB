@@ -13,18 +13,18 @@ const Profile = () => {
 	const [ bio, setBio ] = useState()
 
 	useEffect( () => {
-		getUser( param.user ).then( res => {
-			if ( res ) {
-				setUser( res )
-				setBio( res.bio )
+		getUser( param.user ).then( resu => {
+			if ( resu ) {
+				setUser( resu )
+				setBio( resu.bio )
 				setErr( false )
 				setLoading( false )
-				getUserPfp( res.pfp[ 0 ] ).then( res => {
-					if ( res ) {
-						if ( res.userPfp == "default.png" ) {
+				getUserPfp( resu.pfp[ 0 ] ).then( respfp => {
+					if ( respfp ) {
+						if ( respfp.userPfp == "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
 						} else {
-							setUserIcon( imgUrl + res._id + "/icon/" + res.userPfp )
+							setUserIcon( imgUrl + "/" + resu._id + "/icon/" + respfp.userPfp )
 						}
 						setErr()
 					} else {
@@ -74,6 +74,7 @@ const Profile = () => {
 			{ user &&
 				<div className="profWrap">
 					<div className="userContent">
+						
 					</div>
 					<div className="userInfo">
 						<div className="userTop">
