@@ -25,15 +25,6 @@ export const getUser = async ( userId ) => {
 
 }
 
-export const getUserPfp = async ( userId ) => {
-
-	let res = await axios.get( api.baseUrl + 'userpfp' + '/' + userId )
-		.then( res => { return res.data } )
-		.catch( err => { return err.response.data } )
-	return res;
-
-}
-
 export const createUser = async ( formData ) => {
 
 	let formdata = new FormData( formData )

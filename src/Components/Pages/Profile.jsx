@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getUser, getUserPfp, editBio, imgUrl } from '../Helpers/User';
+import { useParams, Navigate } from 'react-router-dom';
+import { MdEditNote, MdPlaylistAddCheck } from "react-icons/md";
+import { getUser, editBio, imgUrl } from '../Helpers/User';
+import { getUserPfp, getComics } from '../Helpers/Image';
+import PostThumbs from '../Partials/PostThumb';
+
 
 const Profile = () => {
 
@@ -11,20 +15,21 @@ const Profile = () => {
 	const [ err, setErr ] = useState( false )
 	const [ loading, setLoading ] = useState( true )
 	const [ bio, setBio ] = useState()
+	const [ comics, setComics ] = useState()
 
 	useEffect( () => {
 		getUser( param.user ).then( resu => {
-			if ( resu ) {
-				setUser( resu )
-				setBio( resu.bio )
+			if ( resu.found == true ) {
+				setUser( resu.user )
+				setBio( resu.user.bio )
 				setErr( false )
 				setLoading( false )
-				getUserPfp( resu.pfp[ 0 ] ).then( respfp => {
+				getUserPfp( resu.user.pfp[ 0 ] ).then( respfp => {
 					if ( respfp ) {
 						if ( respfp.userPfp == "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
 						} else {
-							setUserIcon( imgUrl + "/" + resu._id + "/icon/" + respfp.userPfp )
+							setUserIcon( imgUrl + "/" + resu.user._id + "/icon/" + respfp.userPfp )
 						}
 						setErr()
 					} else {
@@ -32,13 +37,20 @@ const Profile = () => {
 						setUserIcon()
 					}
 				} )
+				getComics( resu.user.posts ).then( resc => {
+					if ( resc ) {
+						setComics( resc )
+					} else {
+						console.log( 'comic error' )
+					}
+				} )
 			} else {
 				setUser()
 				setErr( true )
-				setLoading( false )
+				setLoading( true )
 			}
 		} )
-	}, [] )
+	}, [ param.user ] )
 
 	let updateBio = ( e ) => {
 		e.preventDefault()
@@ -70,14 +82,25 @@ const Profile = () => {
 	}
 
 	return (
-		<>
+		<section>
 			{ user &&
 				<div className="profWrap">
 					<div className="userContent">
-						
+						<div className="userContentTitle">
+							<h1>{ user.username }'s Comics</h1>
+						</div>
+						<div className="userComicContent">
+							{ comics &&
+								comics.map( ( c, i ) => {
+									return <PostThumbs key={ i } c={ c } />
+								} )
+							}
+						</div>
 					</div>
-					<div className="userInfo">
-						<div className="userTop">
+					<div className="user">
+						<div className="userWrap">
+							<div className="userTop"></div>
+							{/* <div className="userInfo"> */ }
 							<div className="userIcon">
 								<img src={ userIcon } alt={ user.username } />
 							</div>
@@ -85,27 +108,28 @@ const Profile = () => {
 								<p>{ user.displayname }</p>
 								<p>@{ user.username }</p>
 							</div>
-						</div>
-						<div className="userBio">
-							{
-								localStorage.getItem( 'userId' ) == user._id ?
-									user.bio === "" ?
-										<form id='bioForm'>
-											<textarea rows='1' name="bio" id="bio" placeholder="Write something about yourself..." onChange={ e => setBio( e.target.value ) } disabled ></textarea>
-											<input type="submit" value="Edit" id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } />
-											<input type="submit" value="Update" id="update" onClick={ ( e ) => updateBio( e ) } />
-										</form>
+							{/* </div> */ }
+							<div className="userBio">
+								{
+									localStorage.getItem( 'userId' ) == user._id ?
+										user.bio === "" ?
+											<form id='bioForm'>
+												<textarea name="bio" id="bio" placeholder="Write something about yourself..." onChange={ e => setBio( e.target.value ) } disabled ></textarea>
+												<button id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } ><MdEditNote /></button>
+												<button id="update" onClick={ ( e ) => updateBio( e ) } > <MdPlaylistAddCheck /> </button>
+											</form>
+											:
+											<form id='bioForm'>
+												<textarea name="bio" id="bio" defaultValue={ bio } onChange={ e => setBio( e.target.value ) } disabled ></textarea>
+												<button id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } ><MdEditNote /></button>
+												<button id="update" onClick={ ( e ) => updateBio( e ) } > <MdPlaylistAddCheck /> </button>
+											</form>
 										:
-										<form id='bioForm'>
-											<textarea name="bio" id="bio" defaultValue={ bio } onChange={ e => setBio( e.target.value ) } disabled ></textarea>
-											<input type="submit" value="Edit" id="edit" className='active' onClick={ ( e ) => activateEdit( e ) } />
-											<input type="submit" value="Update" id="update" onClick={ ( e ) => updateBio( e ) } />
-										</form>
-									:
-									<div className='bio'>
-										{ user.bio }
-									</div>
-							}
+										<div className='bio'>
+											{ user.bio === "" ? <>This user has no bio</> : user.bio }
+										</div>
+								}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -113,10 +137,9 @@ const Profile = () => {
 			{ loading && !err &&
 				<>Loading...</>
 			}
-			{ err &&
-				<>ERROR...</>
+			{ err && <Navigate to="/nopage" replace />
 			}
-		</>
+		</section>
 	);
 };
 
