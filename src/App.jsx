@@ -26,6 +26,7 @@ function App () {
 		<BrowserRouter>
 			<LoginContextProvider>
 				<Routes>
+					
 					<Route path="/" element={ <Layout /> }>
 						<Route index element={ <Dashboard /> } />
 						<Route path="/login" element={ <Login /> } />
@@ -33,10 +34,12 @@ function App () {
 						<Route path="/u/:user" element={ <Profile /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
+
 					<Route path="/admin" element={ <AdminLayout /> }>
 						<Route index element={ <AdminHome /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
+
 				</Routes>
 			</LoginContextProvider>
 		</BrowserRouter>

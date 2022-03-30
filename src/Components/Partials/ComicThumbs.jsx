@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PostThumb = ( props ) => {
+const ComicThumbs = ( props ) => {
 	return (
 		<>
 			<div className='comicWrap'>
@@ -17,4 +17,4 @@ const PostThumb = ( props ) => {
 	)
 }
 
-export default PostThumb
+export default ComicThumbs

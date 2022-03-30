@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { MdEditNote, MdPlaylistAddCheck } from "react-icons/md";
 import { getUser, editBio, imgUrl } from '../Helpers/User';
 import { getUserPfp, getComics } from '../Helpers/Image';
-import PostThumbs from '../Partials/PostThumb';
+import ComicThumbs from '../Partials/ComicThumbs';
 
 
 const Profile = () => {
@@ -19,14 +19,14 @@ const Profile = () => {
 
 	useEffect( () => {
 		getUser( param.user ).then( resu => {
-			if ( resu.found == true ) {
+			if ( resu.found === true ) {
 				setUser( resu.user )
 				setBio( resu.user.bio )
 				setErr( false )
 				setLoading( false )
 				getUserPfp( resu.user.pfp[ 0 ] ).then( respfp => {
 					if ( respfp ) {
-						if ( respfp.userPfp == "default.png" ) {
+						if ( respfp.userPfp === "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
 						} else {
 							setUserIcon( imgUrl + "/" + resu.user._id + "/icon/" + respfp.userPfp )
@@ -57,7 +57,7 @@ const Profile = () => {
 		let bioT = document.getElementById( "bio" )
 		document.querySelector( "#edit" ).classList.toggle( "active" )
 		document.querySelector( "#update" ).classList.toggle( "active" )
-		if ( bio == user.bio ) {
+		if ( bio === user.bio ) {
 			bioT.disabled = true
 		} else {
 			editBio( user._id, { "bio": bio } ).then( res => {
@@ -92,7 +92,7 @@ const Profile = () => {
 						<div className="userComicContent">
 							{ comics &&
 								comics.map( ( c, i ) => {
-									return <PostThumbs key={ i } c={ c } />
+									return <ComicThumbs key={ i } c={ c } />
 								} )
 							}
 						</div>
@@ -100,7 +100,6 @@ const Profile = () => {
 					<div className="user">
 						<div className="userWrap">
 							<div className="userTop"></div>
-							{/* <div className="userInfo"> */ }
 							<div className="userIcon">
 								<img src={ userIcon } alt={ user.username } />
 							</div>
@@ -108,10 +107,9 @@ const Profile = () => {
 								<p>{ user.displayname }</p>
 								<p>@{ user.username }</p>
 							</div>
-							{/* </div> */ }
 							<div className="userBio">
 								{
-									localStorage.getItem( 'userId' ) == user._id ?
+									localStorage.getItem( 'userId' ) === user._id ?
 										user.bio === "" ?
 											<form id='bioForm'>
 												<textarea name="bio" id="bio" placeholder="Write something about yourself..." onChange={ e => setBio( e.target.value ) } disabled ></textarea>
