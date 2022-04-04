@@ -18,7 +18,7 @@ export const getUsers = async () => {
 
 export const getUser = async ( userId ) => {
 
-	let res = await axios.get( api.baseUrl + 'user' + '/' + userId )
+	let res = await axios.get( api.baseUrl + 'user/' + userId )
 		.then( res => { return res.data; } )
 		.catch( err => { return err.response.data } )
 	return res;

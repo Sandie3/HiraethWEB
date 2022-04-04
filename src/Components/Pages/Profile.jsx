@@ -24,12 +24,12 @@ const Profile = () => {
 				setBio( resu.user.bio )
 				setErr( false )
 				setLoading( false )
-				getUserPfp( resu.user.pfp[ 0 ] ).then( respfp => {
-					if ( respfp ) {
-						if ( respfp.userPfp === "default.png" ) {
+				getUserPfp( resu.user.icon[ 0 ] ).then( resIcon => {
+					if ( resIcon ) {
+						if ( resIcon.userIcon === "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
 						} else {
-							setUserIcon( imgUrl + "/" + resu.user._id + "/icon/" + respfp.userPfp )
+							setUserIcon( imgUrl + "/" + resu.user._id + "/icon/" + resIcon.userIcon )
 						}
 						setErr()
 					} else {
@@ -37,11 +37,16 @@ const Profile = () => {
 						setUserIcon()
 					}
 				} )
-				getComics( resu.user.posts ).then( resc => {
+				getComics( resu.user.comics ).then( resc => {
 					if ( resc ) {
-						setComics( resc )
+						if ( resu.user.comics.length > 0 ) {
+							setComics( resc )
+						} else {
+							setComics()
+						}
 					} else {
 						console.log( 'comic error' )
+						setComics()
 					}
 				} )
 			} else {
@@ -94,6 +99,10 @@ const Profile = () => {
 								comics.map( ( c, i ) => {
 									return <ComicThumbs key={ i } c={ c } />
 								} )
+							}
+							{
+								!comics &&
+								<>User has no comics</>
 							}
 						</div>
 					</div>

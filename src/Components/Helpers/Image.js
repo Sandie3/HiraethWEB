@@ -9,7 +9,7 @@ export let imgUrl = api.imageUrl
 
 export const getUserPfp = async ( userId ) => {
 
-	let res = await axios.get( api.baseUrl + 'userpfp' + '/' + userId )
+	let res = await axios.get( api.baseUrl + 'usericon/' + userId )
 		.then( res => { return res.data } )
 		.catch( err => { return err.response.data } )
 	return res;
