@@ -1,15 +1,9 @@
 import axios from 'axios'
-
-const api = {
-	baseUrl: 'http://localhost:4010/',
-	imageUrl: 'http://localhost:4010/images'
-}
-
-export let imgUrl = api.imageUrl
+import { baseUrl } from './Api'
 
 export const getUserPfp = async ( userId ) => {
 
-	let res = await axios.get( api.baseUrl + 'usericon/' + userId )
+	let res = await axios.get( baseUrl + 'usericon/' + userId )
 		.then( res => { return res.data } )
 		.catch( err => { return err.response.data } )
 	return res;
@@ -18,7 +12,7 @@ export const getUserPfp = async ( userId ) => {
 
 export const getComics = async () => {
 
-	let res = await axios.get( api.baseUrl + 'comic' )
+	let res = await axios.get( baseUrl + 'comic' )
 		.then( res => { return res.data; } )
 		.catch( err => { return err.response.data } )
 	return res;

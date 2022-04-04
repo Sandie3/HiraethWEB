@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { MdEditNote, MdPlaylistAddCheck } from "react-icons/md";
-import { getUser, editBio, imgUrl } from '../Helpers/User';
+import { getUser, editBio } from '../Helpers/User';
+import { imgUrl } from '../Helpers/Api';
 import { getUserPfp, getComics } from '../Helpers/Image';
 import ComicThumbs from '../Partials/ComicThumbs';
 

@@ -18,6 +18,8 @@ import Profile from './Components/Pages/Profile'
 import AdminLayout from './Components/Layout/AdminLayout'
 import AdminHome from './Components/Pages/Admin/AdminHome'
 
+import Comic from './Components/Pages/Comic';
+
 import './Sass/Main.scss';
 
 function App () {
@@ -32,6 +34,11 @@ function App () {
 						<Route path="/login" element={ <Login /> } />
 						<Route path="/signup" element={ <Signup /> } />
 						<Route path="/u/:user" element={ <Profile /> } />
+						<Route path='*' element={ <NoPage /> } />
+					</Route>
+
+					<Route path="/comic" element={ <Layout /> }>
+						<Route path=":id" element={ <Comic /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
 
