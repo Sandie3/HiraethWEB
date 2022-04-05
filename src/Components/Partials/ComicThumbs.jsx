@@ -2,17 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { imgUrl } from '../Helpers/Api'
 
-const ComicThumbs = ( props ) => {
+const ComicThumbs = ( { comic } ) => {
 	return (
 		<>
 			<div className='comicWrap'>
 				<div className="comicImgWrap">
-					<Link to={ "/comic/" + props.c._id }>
-						<img src={ imgUrl + props.c.images[ 0 ].destination + "thumbnail/thumb-" + props.c.images[ 0 ].filename } alt={ props.c.title + " image" } />
+					<Link to={ "/comic/" + comic._id }>
+						<img src={ imgUrl + comic.images[ 0 ].destination + "thumbnail/thumb-" + comic.images[ 0 ].filename } alt={ comic.title + " image" } />
 					</Link>
 				</div>
 				<div className="comicTitle">
-					<h1>{ props.c.title }</h1>
+					<h1>{ comic.title }</h1>
 				</div>
 				<div className="comicTitleShadow">
 				</div>

@@ -3,7 +3,8 @@ import { useParams, Navigate } from 'react-router-dom';
 import { MdEditNote, MdPlaylistAddCheck } from "react-icons/md";
 import { getUser, editBio } from '../Helpers/User';
 import { imgUrl } from '../Helpers/Api';
-import { getUserPfp, getComics } from '../Helpers/Image';
+import { getUserPfp } from '../Helpers/Image';
+import { getComicsFromUser } from '../Helpers/Comic';
 import ComicThumbs from '../Partials/ComicThumbs';
 
 
@@ -38,9 +39,10 @@ const Profile = () => {
 						setUserIcon()
 					}
 				} )
-				getComics( resu.user.comics ).then( resc => {
+				getComicsFromUser( resu.user._id ).then( resc => {
 					if ( resc ) {
-						if ( resu.user.comics.length > 0 ) {
+						console.log(resc)
+						if ( resu.length > 0 ) {
 							setComics( resc )
 						} else {
 							setComics()
@@ -98,7 +100,7 @@ const Profile = () => {
 						<div className="userComicContent">
 							{ comics &&
 								comics.map( ( c, i ) => {
-									return <ComicThumbs key={ i } c={ c } />
+									return <ComicThumbs key={ i } comic={ c } />
 								} )
 							}
 							{
