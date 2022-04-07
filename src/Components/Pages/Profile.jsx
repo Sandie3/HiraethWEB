@@ -19,8 +19,8 @@ const Profile = () => {
 	const [ bio, setBio ] = useState()
 	const [ comics, setComics ] = useState()
 
-	useEffect( () => {
-		getUser( param.user ).then( resu => {
+	useEffect( async () => {
+		await getUser( param.user ).then( resu => {
 			if ( resu.found === true ) {
 				setUser( resu.user )
 				setBio( resu.user.bio )
@@ -41,12 +41,7 @@ const Profile = () => {
 				} )
 				getComicsFromUser( resu.user._id ).then( resc => {
 					if ( resc ) {
-						console.log(resc)
-						if ( resu.length > 0 ) {
-							setComics( resc )
-						} else {
-							setComics()
-						}
+						setComics( resc )
 					} else {
 						console.log( 'comic error' )
 						setComics()

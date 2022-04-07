@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import { Navigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { getComic } from '../Helpers/Comic'
 import { imgUrl } from '../Helpers/Api'
 
@@ -38,13 +37,16 @@ const Comic = () => {
 					<>
 						<div className="comicTop">
 							<div className="comicHero">
-								<img src={ comic.images[ 0 ].path } alt={ comic.title + " image" } />
+								<Link to={ "/viewer/test/1" }>
+									<img src={ comic.images[ 0 ].path } alt={ comic.title + " image" } />
+								</Link>
 							</div>
 							<div className="comicInfo">
 								<h1 className='comicTitle'>{ comic.title }</h1>
 								<p className='comicDescription'>{ comic.description }</p>
 								<div className='comicTags'>
-									<span>Tags</span><br /><br />
+									<h1>Tags: </h1>
+
 									{
 										tags &&
 										tags.map( ( t, i ) => <a key={ i } href="">{ t }</a> )
@@ -56,9 +58,11 @@ const Comic = () => {
 							{
 								comic.images.map( ( c, i ) => {
 									return (
-										<Fragment key={ i }>
-											<img src={ imgUrl + c.destination + "thumbnail/thumb-" + c.filename } alt={ comic.title + " image" } />
-										</Fragment>
+										<div key={ i }>
+											<Link to={ "/viewer/test/1" }>
+												<img src={ imgUrl + c.destination + "thumbnail/thumb-" + c.filename } alt={ comic.title + " image" } />
+											</Link>
+										</div>
 									)
 								} )
 							}

@@ -1,16 +1,21 @@
 .comic{
+	max-width: 656px;
+	min-width: 332px;
+	margin: 0 auto;
 	.comicTop{
 		display: flex;
-		flex-direction: row;
+		// flex-direction: row;
+		align-items: center;
 		background-color: $col3;
 		padding: 1em;
 		
 		justify-content: center;
-		gap: 2em;
+		// gap: 2em;
 		margin-bottom: 20px;
 		.comicHero{
 			width: 200px;
 			height: 300px;
+			border: 5px solid $col2;
 			img{
 				width: 100%;
 				height: 100%;
@@ -20,30 +25,84 @@
 		}
 		.comicInfo{
 			padding: 1em;
+			width: 250px;
 			.comicTitle{
 				background-color: $col2;
+				font-size: 24px;
+				padding: 2% 5%;
 			}
 			.comicDescription{
 				margin-top: 5px;
 				background-color: $col2;
+				font-size: 14px;
+				padding: 5%;
 			}
 			.comicTags{
 				margin-top: 10px;
-				span{
-					
-				}
+				display: flex;
+				flex-wrap: wrap;
 				a{
 					text-decoration: none;
 					background-color: $col2;
 					color: $col7;
 					font-size: 12px;
 					padding: 5px 10px;
-					margin-right: 5px;
+					margin: 0 5px 5px 0;
 				}
 			}
 		}
 	}
 	.comicBottom{
 		background-color: $col3;
+		padding: 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		div{
+			width: 100px;
+			height: 150px;
+			img{
+				width: 100%;
+				height: 100%;
+			}
+		}
 	}
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and ( max-width: 600px ) {
+	.comicTop{
+		flex-direction: column;
+	}
+	.comicBottom{
+		justify-content: center;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 601px) {
+	.comicTop{
+		flex-direction: row;
+	}
+}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {
+// 	.comicTop{
+// 		flex-direction: row;
+// 	}
+// }
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {
+// 	.comicTop{
+// 		flex-direction: row;
+// 	}
+// }
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {
+// 	.comicTop{
+// 		flex-direction: row;
+// 	}
+// }

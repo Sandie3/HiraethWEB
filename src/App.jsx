@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import NoPage from './Components/Pages/NoPage'
-import LoginContextProvider from './Components/Context/LoginContext';
+import LoginContextProvider from './Components/Context/LoginContext'
 
 import Layout from './Components/Layout/Layout'
 import Dashboard from './Components/Pages/Dashboard'
@@ -14,11 +14,11 @@ import Login from './Components/Pages/Login'
 import Signup from './Components/Pages/Signup'
 
 import Profile from './Components/Pages/Profile'
+import Comic from './Components/Pages/Comic'
+import Viewer from './Components/Pages/Viewer'
 
 import AdminLayout from './Components/Layout/AdminLayout'
 import AdminHome from './Components/Pages/Admin/AdminHome'
-
-import Comic from './Components/Pages/Comic';
 
 import './Sass/Main.scss';
 
@@ -39,6 +39,10 @@ function App () {
 
 					<Route path="/comic" element={ <Layout /> }>
 						<Route path=":id" element={ <Comic /> } />
+						<Route path='*' element={ <NoPage /> } />
+					</Route>
+					<Route path="/viewer" element={ <Layout /> }>
+						<Route path=":comic/:page" element={ <Viewer /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
 
