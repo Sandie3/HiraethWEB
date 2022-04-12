@@ -10,7 +10,7 @@ export const getComics = async () => {
 
 }
 
-export const getComic = async (id) => {
+export const getComic = async ( id ) => {
 
 	let res = await axios.get( baseUrl + 'comic/' + id )
 		.then( res => { return res.data; } )
@@ -19,7 +19,7 @@ export const getComic = async (id) => {
 
 }
 
-export const getComicsFromUser = async (id) => {
+export const getComicsFromUser = async ( id ) => {
 
 	let res = await axios.get( baseUrl + 'comic/user/' + id )
 		.then( res => { return res.data; } )

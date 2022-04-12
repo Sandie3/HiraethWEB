@@ -26,7 +26,7 @@ const Comic = () => {
 			setLoading( false )
 		} )
 
-	}, [] )
+	}, [param.id] )
 
 
 	return (
@@ -37,7 +37,7 @@ const Comic = () => {
 					<>
 						<div className="comicTop">
 							<div className="comicHero">
-								<Link to={ "/viewer/test/1" }>
+								<Link to={ "/viewer/" + comic._id }>
 									<img src={ comic.images[ 0 ].path } alt={ comic.title + " image" } />
 								</Link>
 							</div>
@@ -49,7 +49,7 @@ const Comic = () => {
 
 									{
 										tags &&
-										tags.map( ( t, i ) => <a key={ i } href="">{ t }</a> )
+										tags.map( ( t, i ) => <a key={ i } href={ t }>{ t }</a> )
 									}
 								</div>
 							</div>
@@ -59,7 +59,7 @@ const Comic = () => {
 								comic.images.map( ( c, i ) => {
 									return (
 										<div key={ i }>
-											<Link to={ "/viewer/test/1" }>
+											<Link to={ "/viewer/" + comic._id + "/" + (i+1) }>
 												<img src={ imgUrl + c.destination + "thumbnail/thumb-" + c.filename } alt={ comic.title + " image" } />
 											</Link>
 										</div>

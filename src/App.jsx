@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
 	BrowserRouter,
 	Route,
@@ -28,7 +28,7 @@ function App () {
 		<BrowserRouter>
 			<LoginContextProvider>
 				<Routes>
-					
+
 					<Route path="/" element={ <Layout /> }>
 						<Route index element={ <Dashboard /> } />
 						<Route path="/login" element={ <Login /> } />

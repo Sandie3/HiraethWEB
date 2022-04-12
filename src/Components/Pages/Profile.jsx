@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { MdEditNote, MdPlaylistAddCheck } from "react-icons/md";
 import { getUser, editBio } from '../Helpers/User';
 import { imgUrl } from '../Helpers/Api';
-import { getUserPfp } from '../Helpers/Image';
+import { getUserIcon } from '../Helpers/Image';
 import { getComicsFromUser } from '../Helpers/Comic';
 import ComicThumbs from '../Partials/ComicThumbs';
 
@@ -19,14 +19,14 @@ const Profile = () => {
 	const [ bio, setBio ] = useState()
 	const [ comics, setComics ] = useState()
 
-	useEffect( async () => {
-		await getUser( param.user ).then( resu => {
+	useEffect( () => {
+		getUser( param.user ).then( resu => {
 			if ( resu.found === true ) {
 				setUser( resu.user )
 				setBio( resu.user.bio )
 				setErr( false )
 				setLoading( false )
-				getUserPfp( resu.user.icon[ 0 ] ).then( resIcon => {
+				getUserIcon( resu.user.icon[ 0 ] ).then( resIcon => {
 					if ( resIcon ) {
 						if ( resIcon.userIcon === "default.png" ) {
 							setUserIcon( imgUrl + '/icons/default.png' )
