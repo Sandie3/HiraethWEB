@@ -21,6 +21,7 @@ import AdminLayout from './Components/Layout/AdminLayout'
 import AdminHome from './Components/Pages/Admin/AdminHome'
 
 import './Sass/Main.scss';
+import Test from './Test';
 
 function App () {
 
@@ -50,6 +51,8 @@ function App () {
 						<Route index element={ <AdminHome /> } />
 						<Route path='*' element={ <NoPage /> } />
 					</Route>
+
+					<Route path='/test' element={ <Test /> } />
 
 				</Routes>
 			</LoginContextProvider>
