@@ -1,10 +1,43 @@
-$primary: #222626;
-$bgCol: #2e2e2e;
-$col2: #383838;
-$col3: #464646;
-$col4: #6e6d6e;
-$col5: #a4a4ab;
-$col6: #cdd1cc;
-$col7: #f1f1f1;
-$col8: #00c17f;
-$col9: #ee3835;
+.theme-dark {
+	--col-primary: #222626;
+	--col-bgCol: #2e2e2e;
+	--col-col2: #383838;
+	--col-col3: #464646;
+	--col-col4: #6e6d6e;
+	--col-col5: #a4a4ab;
+	--col-col6: #cdd1cc;
+	--col-col7: #f1f1f1;
+	--col-col8: #00c17f;
+	--col-col9: #ee3835;
+}
+
+.theme-light {
+	--col-primary: #222626;
+	--col-bgCol: #fff;
+	--col-col2: #383838;
+	--col-col3: #464646;
+	--col-col4: #6e6d6e;
+	--col-col5: #a4a4ab;
+	--col-col6: #cdd1cc;
+	--col-col7: #f1f1f1;
+	--col-col8: #00c17f;
+	--col-col9: #ee3835;
+}
+
+$navy: #001f3f;
+$blue: #0074D9;
+$aqua: #7FDBFF;
+$teal: #39CCCC;
+$purple: #B10DC9;
+$FUCHSIA: #F012BE;
+$MAROON: #85144b;
+$RED: #FF4136;
+$ORANGE: #FF851B;
+$YELLOW: #FFDC00;
+$OLIVE: #3D9970;
+$GREEN: #2ECC40;
+$LIME: #01FF70;
+$BLACK: #111111;
+$GRAY: #AAAAAA;
+$SILVER: #DDDDDD;
+$WHITE: #FFFFFF;

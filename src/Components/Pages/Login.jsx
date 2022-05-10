@@ -4,7 +4,7 @@ import { LoginContext } from '../Context/LoginContext'
 
 const LoginBox = () => {
 
-	const { signin, loggedIn } = useContext( LoginContext )
+	const { signin, loginStatus } = useContext( LoginContext )
 
 	let navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const LoginBox = () => {
 	return (
 		<>
 			{
-				!loggedIn &&
+				!loginStatus &&
 				<section>
 					<div className="wrapper">
 						<form className="loginForm" onSubmit={ handleSubmit }>
@@ -45,7 +45,7 @@ const LoginBox = () => {
 				</section >
 			}
 			{
-				loggedIn && <Navigate to="/" replace />
+				loginStatus && <Navigate to="/" replace />
 			}
 		</>
 	)

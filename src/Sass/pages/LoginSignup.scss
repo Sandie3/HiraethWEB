@@ -5,13 +5,13 @@
 	transform: translate(-50%, -50%);
 	h1 {
 		font-size: 20px;
-		background-color: $col2;
+		background-color: var(--col-col2);
 		padding: 0.5rem;
 		text-align: center;
-		color: $col5;
+		color: var(--col-col5);
 	}
 	.formWrapper {
-		background: $col3;
+		background: var(--col-col3);
 		padding: 1rem;
 		.txtBox {
 			input {
@@ -19,27 +19,27 @@
 				padding: 0.5em 0.7em;
 				border: none;
 				border-bottom: 1px solid rgb(197, 197, 197);
-				color: $col3;
+				color: var(--col-col3);
 				&:focus-visible {
-					outline: 2px solid $col8;
+					outline: 2px solid var(--col-col8);
 				}
 				&:focus {
 					&::placeholder {
-						color: $col7;
+						color: var(--col-col7);
 					}
 				}
 			}
 		}
 		.logBtn {
 			border: none;
-			background-color: $col8;
+			background-color: var(--col-col8);
 			display: block;
 			margin-bottom: 0.5em;
 			padding: 0.5em 1em;
 			font-size: 1rem;
 			border-radius: 5px;
 			width: 100%;
-			color: $col7;
+			color: var(--col-col7);
 			text-align: center;
 			cursor: pointer;
 		}
@@ -48,10 +48,10 @@
 			text-align: center;
 			span {
 				display: block;
-				color: $col5;
+				color: var(--col-col5);
 			}
 			a {
-				color: $col8;
+				color: var(--col-col8);
 			}
 		}
 	}

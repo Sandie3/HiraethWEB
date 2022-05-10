@@ -7,8 +7,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  max-height: 700px;
+  min-height: 250px;
+  height: 100%;
+  width: 100%;
   color: #fff;
+  img{
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
 }
 
 .inner {

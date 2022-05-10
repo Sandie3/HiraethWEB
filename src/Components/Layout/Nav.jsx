@@ -4,13 +4,13 @@ import { LoginContext } from '../Context/LoginContext';
 
 const Nav = () => {
 
-	const { signout, loggedIn } = useContext( LoginContext )
+	const { signout, loginStatus } = useContext( LoginContext )
 
 	let navigate = useNavigate();
 
 	let findUser = localStorage.getItem( 'username' );
 	let user;
-	if ( findUser != undefined || findUser != null ) {
+	if ( findUser !== undefined || findUser !== null ) {
 		user = findUser;
 	}
 
@@ -28,7 +28,7 @@ const Nav = () => {
 			<div className="navWrap">
 				<Link to="/" className='navLink'>Home</Link>
 				{
-					loggedIn &&
+					loginStatus &&
 					<>
 						<Link to="/admin" className='navLink'>Admin</Link>
 						{/* <Link to={ "/user/" + user } className='navLink'>Profile</Link> */ }
@@ -38,7 +38,7 @@ const Nav = () => {
 					</>
 				}
 				{
-					!loggedIn &&
+					!loginStatus &&
 					<>
 						<Link to="/login" className='navLink'>Login</Link>
 					</>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
+import Toggle from '../Toggle'
+
 import { getUsers } from '../Helpers/User'
 
 const Dashboard = () => {
@@ -27,13 +29,18 @@ const Dashboard = () => {
 		<>
 			{
 				users &&
-				users.map( ( u, i ) => {
-					return (
-						<Fragment key={ i }>
-							<Link to={ "/u/" + u.username }>{ u.username }</Link><br />
-						</Fragment>
-					)
-				} )
+				<>
+				<Toggle />
+					{ 
+					users.map( ( u, i ) => {
+						return (
+							<Fragment key={ i }>
+								<Link to={ "/u/" + u.username }>{ u.username }</Link><br />
+							</Fragment>
+						)
+					} )
+					}
+				</>
 			}
 			{
 				!users && !err && <p>Loading...</p>

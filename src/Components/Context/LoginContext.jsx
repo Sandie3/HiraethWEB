@@ -1,15 +1,15 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import * as Login from '../Helpers/Login'
-import { createUser } from '../Helpers/User';
 
 export const LoginContext = createContext()
 
 const LoginContextProvider = ( props ) => {
 
-	let [ user, setUser ] = useState( null )
-	const [ loggedIn, setloggedIn ] = useState( null )
+	const [ loggedIn, setloggedIn ] = useState()
 	const [ message, setMessage ] = useState()
+	const loginStatus = useMemo(() => loggedIn, [loggedIn])
+
 
 	let navigate = useNavigate()
 
@@ -19,7 +19,7 @@ const LoginContextProvider = ( props ) => {
 		localStorage.removeItem( 'userId' )
 		Login.login( e.target )
 			.then( res => {
-				if ( res.login == true ) {
+				if ( res.login === true ) {
 					localStorage.setItem( 'username', res.username )
 					localStorage.setItem( 'userId', res.user_id )
 					setloggedIn( true )
@@ -34,7 +34,7 @@ const LoginContextProvider = ( props ) => {
 
 	let signout = ( e ) => {
 		Login.logout().then( res => {
-			if ( res.login == false ) {
+			if ( res.login === false ) {
 				localStorage.removeItem( 'username' )
 				localStorage.removeItem( 'userId' )
 				navigate( "/login", { replace: true } )
@@ -47,21 +47,20 @@ const LoginContextProvider = ( props ) => {
 		} )
 	};
 
-	let isLoggedIn = () => {
-		Login.loggedin().then( res => {
-			if ( res.login == true ) {
-				// return true;
-				setloggedIn( true )
-			} else if ( res.login == false ) {
-				// return false;
-				setloggedIn( false )
-			}
-		} )
-	}
-	isLoggedIn();
+	useEffect(() => {
 
+		Login.loggedin().then( async res => {
+				if ( await res.login === true ) {
+					setloggedIn( true )
+				} else if ( await res.login === false ) {
+					setloggedIn( false )
+				}
+			} )
+			
+		}, [])
+		
 	return (
-		<LoginContext.Provider value={ { user, loggedIn, message, signin, signout } }>
+		<LoginContext.Provider value={ { loginStatus, message, signin, signout } }>
 			{ props.children }
 		</LoginContext.Provider>
 	)

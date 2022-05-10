@@ -5,27 +5,31 @@ import { LoginContext } from '../Context/LoginContext'
 
 const SignupBox = () => {
 
-	const { loggedIn } = useContext( LoginContext )
+	const { loginStatus } = useContext( LoginContext )
 
 	let navigate = useNavigate();
 
 	const [ displayName, setDisplayName ] = useState()
-	const [message, setMessage] = useState()
+	const [ message, setMessage ] = useState()
 
 	let signUp = ( e ) => {
 		e.preventDefault();
 		localStorage.removeItem( 'username' )
 		localStorage.removeItem( 'userId' )
-		console.log(e.target)
+		console.log( e.target )
 		createUser( e.target ).then( res => {
-			if ( res.login == false ) {
-				console.log( res )
-				localStorage.setItem( 'username', res.created.username )
-				localStorage.setItem( 'userId', res.created._id )
-				navigate( "/", { replace: true } );
-				setTimeout( () => {
-					document.location.reload( true )
-				}, 500 );
+			if ( res ) {
+				if ( res.login === false ) {
+					console.log( res )
+					localStorage.setItem( 'username', res.created.username )
+					localStorage.setItem( 'userId', res.created._id )
+					navigate( "/", { replace: true } );
+					setTimeout( () => {
+						document.location.reload( true )
+					}, 500 );
+				} else {
+					setMessage( res.message )
+				}
 			} else {
 				setMessage( res.message )
 			}
@@ -35,11 +39,12 @@ const SignupBox = () => {
 	return (
 		<>
 			{
-				!loggedIn &&
+				!loginStatus &&
 				<section>
 					<div className="wrapper">
 						<form className="loginForm" onSubmit={ signUp }>
 							<h1>Signup</h1>
+							{ message && message}
 							<div className="formWrapper">
 								<div className="txtBox">
 									<input type="text" id="username" name="username" placeholder='Username' onChange={ e => setDisplayName( e.target.value ) } />
@@ -61,7 +66,7 @@ const SignupBox = () => {
 				</section >
 			}
 			{
-				loggedIn && <Navigate to="/" replace />
+				loginStatus && <Navigate to="/" replace />
 			}
 		</>
 	)

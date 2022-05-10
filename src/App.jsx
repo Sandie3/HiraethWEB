@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	BrowserRouter,
 	Route,
@@ -23,7 +23,13 @@ import AdminHome from './Components/Pages/Admin/AdminHome'
 import './Sass/Main.scss';
 import Test from './Test';
 
+import { keepTheme } from './Components/utils/theme'
+
 function App () {
+
+	useEffect(() => {
+		keepTheme();
+	})
 
 	return (
 		<BrowserRouter>

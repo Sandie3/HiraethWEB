@@ -23,13 +23,13 @@
 }
 
 html {
-	background-color: $bgCol;
+	background-color: var(--col-bgCol);
 	font-family: "Roboto", Verdana, Geneva, Tahoma, sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	text-decoration: none;
-	color: $col7;
+	color: var(--col-col7);
 	background-image: url("../Images/bgweb2.png");
 	background-repeat: no-repeat;
 	background-position: center bottom;
@@ -46,7 +46,7 @@ nav {
 	width: 100%;
 	height: 5vh;
 	display: block;
-	background-color: $col3;
+	background-color: var(--col-col3);
 	display: flex;
 	justify-content: flex-end;
 	.navWrap {
@@ -57,7 +57,7 @@ nav {
 		.navLink {
 			display: block;
 			border: none;
-			color: $col8;
+			color: var(--col-col8);
 			text-decoration: none;
 			background: none;
 			align-self: center;
