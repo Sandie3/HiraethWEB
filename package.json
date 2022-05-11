@@ -2,6 +2,7 @@
   "name": "hiraethweb",
   "version": "0.1.0",
   "private": true,
+	"author": "Sander Berglie <sandermunkh@gmail.com>",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.5",
@@ -18,6 +19,10 @@
   },
 	"devDependencies": {
     "react-scripts": "^5.0.1"
+  },
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sandie3/HiraethWEB.git"
   },
   "scripts": {
     "start": "react-scripts start",
